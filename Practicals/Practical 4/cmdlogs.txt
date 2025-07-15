@@ -1,0 +1,205 @@
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 11.8.2-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.018 sec)
+
+MariaDB [(none)]> create database db
+    -> ;
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [(none)]> use db
+Database changed
+MariaDB [db]> create table emp
+    -> (eno int, ename varchar(20),salary int);
+Query OK, 0 rows affected (0.035 sec)
+
+MariaDB [db]>  insert into emp values(100,'rajesh',50000),(101,'ram',60000),(102, 'Onasus',2);
+Query OK, 3 rows affected (0.017 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [db]> select * from emp
+    -> ;
++------+--------+--------+
+| eno  | ename  | salary |
++------+--------+--------+
+|  100 | rajesh |  50000 |
+|  101 | ram    |  60000 |
+|  102 | Onasus |      2 |
++------+--------+--------+
+3 rows in set (0.002 sec)
+
+MariaDB [db]> insert into emp values(103,'Sarwica',18000),(104,'Kusi',65095);
+Query OK, 2 rows affected (0.001 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db]> delimiter //
+MariaDB [db]> create procedure getEmpData()
+    -> begin
+    -> select * from emp;
+    -> end //
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [db]> create procedure getDetails(IN eno INT)
+    -> begin
+    -> select * from emp where eno=e;
+    -> end //
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [db]> delimiter ;
+MariaDB [db]> getEmpData()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'getEmpData()' at line 1
+MariaDB [db]> call getEmpData
+    -> ;
++------+---------+--------+
+| eno  | ename   | salary |
++------+---------+--------+
+|  100 | rajesh  |  50000 |
+|  101 | ram     |  60000 |
+|  102 | Onasus  |      2 |
+|  103 | Sarwica |  18000 |
+|  104 | Kusi    |  65095 |
++------+---------+--------+
+5 rows in set (0.002 sec)
+
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [db]> call getDetails(100)
+    -> ;
+ERROR 1054 (42S22): Unknown column 'e' in 'WHERE'
+MariaDB [db]> delimiter //
+MariaDB [db]> create procedure getDetails(IN e INT)
+    -> begin
+    -> select * from emp where eno=e;
+    -> end //
+ERROR 1304 (42000): PROCEDURE getDetails already exists
+MariaDB [db]> delete procedure getDetails
+    -> ;
+    -> //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'procedure getDetails' at line 1
+MariaDB [db]> delimiter ;
+MariaDB [db]> delete procedure getDetails;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'procedure getDetails' at line 1
+MariaDB [db]> drop procedure getDetails;
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [db]> delimiter //
+MariaDB [db]> create procedure getDetails(IN e INT)
+    -> begin
+    -> select * from emp where eno=e;
+    -> end //
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [db]> call getDetails(100)//
++------+--------+--------+
+| eno  | ename  | salary |
++------+--------+--------+
+|  100 | rajesh |  50000 |
++------+--------+--------+
+1 row in set (0.004 sec)
+
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [db]> delimiter ;
+MariaDB [db]> call getDetails;
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE db.getDetails; expected 1, got 0
+MariaDB [db]> call getEmpData;
++------+---------+--------+
+| eno  | ename   | salary |
++------+---------+--------+
+|  100 | rajesh  |  50000 |
+|  101 | ram     |  60000 |
+|  102 | Onasus  |      2 |
+|  103 | Sarwica |  18000 |
+|  104 | Kusi    |  65095 |
++------+---------+--------+
+5 rows in set (0.001 sec)
+
+Query OK, 0 rows affected (0.004 sec)
+
+MariaDB [db]> delimiter //
+MariaDB [db]> create procedure getSal(IN s INT)
+    -> begin
+    -> select salary from emp where //
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+MariaDB [db]> create procedure getSal(IN e INT)
+    -> begin
+    -> select salary from emp where eno=e;
+    -> end //
+Query OK, 0 rows affected (0.003 sec)
+
+MariaDB [db]> call getSal(100)//
++--------+
+| salary |
++--------+
+|  50000 |
++--------+
+1 row in set (0.001 sec)
+
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [db]> delimiter ;
+MariaDB [db]> delimiter //
+MariaDB [db]> create or replace procedure getSal(IN e INT, OUT sal INT)
+    -> begin
+    -> select salary into sal from emp where eno=e;
+    -> end //
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [db]> delimiter ;
+MariaDB [db]> call getSal(100,s);
+ERROR 1054 (42S22): Unknown column 's' in 'CALL'
+MariaDB [db]> call getSal(100);
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE db.getSal; expected 2, got 1
+MariaDB [db]> call getSal(100,@M);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [db]> select @M
+    -> ;
++-------+
+| @M    |
++-------+
+| 50000 |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [db]> select * from emp;
++------+---------+--------+
+| eno  | ename   | salary |
++------+---------+--------+
+|  100 | rajesh  |  50000 |
+|  101 | ram     |  60000 |
+|  102 | Onasus  |      2 |
+|  103 | Sarwica |  18000 |
+|  104 | Kusi    |  65095 |
++------+---------+--------+
+5 rows in set (0.001 sec)
+
+MariaDB [db]> call getSal(100,@M);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [db]> select @M;
++-------+
+| @M    |
++-------+
+| 50000 |
++-------+
+1 row in set (0.000 sec)
+
+MariaDB [db]>
