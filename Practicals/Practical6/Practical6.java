@@ -42,11 +42,11 @@ public class Practical6 {
 	
 	public static void main(String[] args) {
 		Practical6 p6=new Practical6();
-		String a3=p6.display("Get the Center word from this sentence.");
-		System.out.println("Answer Q1:\n"+a3);
+		String a1=p6.display("Get the Center word from this sentence.");
+		System.out.println("Answer Q1:\n"+a1);
         String[] black={"the","these","all","them"};
-		String a4=p6.q2("Remove certain words like the word the these them and all. All of these words are supposed to be in the blacklist",black);
-		System.out.println("Answer Q2:\n"+a4);
+		String a2=p6.q2("Remove certain words like the word the these them and all. All of these words are supposed to be in the blacklist",black);
+		System.out.println("Answer Q2:\n"+a2);
 	}
 	
 }
