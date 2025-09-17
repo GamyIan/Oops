@@ -1,4 +1,4 @@
-public class Practical5 {
+public class Practical7 {
 	/*
 	Q1. Write a program to convert every alternate word of a given sentence into uppercase and display the modified sentence.
 	Q2. Write a program which has a method for longest word, which extracts the longest word from the sentence.
@@ -38,7 +38,7 @@ public class Practical5 {
 	}
 	
 	public static void main(String[] args) {
-		Practical5 p5=new Practical5();
+		Practical7 p5=new Practical7();
 		String a1=p5.q1("Make alternate words in this sentence UpperCase.");
 		System.out.println("Answer Q1:\n"+a1);
 		String a2=p5.q2("Find the longest word from this sentence.");

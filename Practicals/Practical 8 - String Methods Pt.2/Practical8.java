@@ -3,7 +3,7 @@ Q3. Write a program which has method display() which shows only the center word 
 Q4. (Tough) You are given a sentence. Filter out the following words (“the”,"these",”all”,”them”).
  */
 
-public class Practical6 {
+public class Practical8 {
 	String display(String sentence) {
 		String output="";
 		String[] words=sentence.split(" ");
@@ -41,7 +41,7 @@ public class Practical6 {
 	}
 	
 	public static void main(String[] args) {
-		Practical6 p6=new Practical6();
+		Practical8 p6=new Practical8();
 		String a1=p6.display("Get the Center word from this sentence.");
 		System.out.println("Answer Q1:\n"+a1);
         String[] black={"the","these","all","them"};
