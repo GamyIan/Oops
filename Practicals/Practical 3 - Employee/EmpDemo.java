@@ -1,5 +1,3 @@
-package edu;
-
 import java.util.Scanner;
 
 class Employee{

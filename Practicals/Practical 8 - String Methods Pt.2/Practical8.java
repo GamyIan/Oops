@@ -41,11 +41,11 @@ public class Practical8 {
 	}
 	
 	public static void main(String[] args) {
-		Practical8 p6=new Practical8();
-		String a1=p6.display("Get the Center word from this sentence.");
+		Practical8 p8=new Practical8();
+		String a1=p8.display("Get the Center word from this sentence.");
 		System.out.println("Answer Q1:\n"+a1);
         String[] black={"the","these","all","them"};
-		String a2=p6.q2("Remove certain words like the word the these them and all. All of these words are supposed to be in the blacklist",black);
+		String a2=p8.q2("Remove certain words like the word the these them and all. All of these words are supposed to be in the blacklist",black);
 		System.out.println("Answer Q2:\n"+a2);
 	}
 	

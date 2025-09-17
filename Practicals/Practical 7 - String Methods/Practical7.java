@@ -38,10 +38,10 @@ public class Practical7 {
 	}
 	
 	public static void main(String[] args) {
-		Practical7 p5=new Practical7();
-		String a1=p5.q1("Make alternate words in this sentence UpperCase.");
+		Practical7 p7=new Practical7();
+		String a1=p7.q1("Make alternate words in this sentence UpperCase.");
 		System.out.println("Answer Q1:\n"+a1);
-		String a2=p5.q2("Find the longest word from this sentence.");
+		String a2=p7.q2("Find the longest word from this sentence.");
 		System.out.println("Answer Q2:\n"+a2);
 	}
 	

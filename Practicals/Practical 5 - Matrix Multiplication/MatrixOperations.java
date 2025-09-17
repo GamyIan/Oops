@@ -33,7 +33,7 @@ class Matrix // I should not have complicated it by making this class should've 
 
 }
 
-public class MatrixMultiplication
+public class MatrixOperations
 {
     public Matrix multiply(Matrix A, Matrix B){
         if (A.cols!=B.rows){
@@ -60,14 +60,33 @@ public class MatrixMultiplication
         
     }
 
+    public Matrix add (Matrix A, Matrix B){
+        if (A.cols!=B.cols || A.rows!=B.rows){
+            throw new IllegalArgumentException("Addition between the matrices not possible.");
+        }
+
+        int[] elements=new int[A.rows*A.cols];
+        int idx=0;
+        for (int i=0;i<A.rows;i++){
+            for (int j=0;j<A.cols;j++){
+                elements[idx++]=A.mat[i][j]+B.mat[i][j];
+            }
+        }
+
+        Matrix C = new Matrix(elements,A.rows,A.cols);
+        return C;
+    }
+
     public static void main(String[] args){
         int[] a = {1, 2, 3, 4, 5, 6};      // 2x3
         int[] b = {7, 8, 9, 10, 11, 12};   // 3x2
-
+        int[] d = {6, 5, 4, 3, 2, 1};   // also 2x3 so can add to A
+        
         Matrix A = new Matrix(a, 2, 3);
         Matrix B = new Matrix(b, 3, 2);
-
-        Matrix C = new MatrixMultiplication().multiply(A, B);
+        Matrix C = new MatrixOperations().multiply(A, B);
+        Matrix D = new Matrix(d, 2, 3);
+        Matrix S = new MatrixOperations().add(A, D);
 
         System.out.println("A:");
         A.display();
@@ -75,6 +94,9 @@ public class MatrixMultiplication
         B.display();
         System.out.println("C = A x B:");
         C.display();
+        System.out.println("S = A + D:");
+        S.display();
+
     }
 
 

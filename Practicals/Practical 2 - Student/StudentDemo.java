@@ -1,6 +1,4 @@
-package edu;
 
-import java.awt.dnd.peer.DragSourceContextPeer;
 import java.util.Scanner;
 
 
@@ -38,11 +36,11 @@ class Student
 	           
 }
 
-public class Demo {
+public class StudentDemo {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
-		
+// Placeholder values for testing
 //		st[0]=new Student(100,"Soul","TYIT");
 //		st[1]=new Student(101,"Ona","SYIT");
 //		st[2]=new Student(102,"Saksam","SYIT");
@@ -60,9 +58,9 @@ public class Demo {
 		for (int i=0;i<n;i++) {
 			System.out.println("Enter the roll no. of Student ["+(i+1)+"]:");
 			roll=sc.nextInt(); // 100
-			sc.nextLine(); // Enter
+			sc.nextLine(); // Eats the Enter input
 			System.out.println("Enter name of Student:");
-			name=sc.nextLine(); // Captures name without Enter
+			name=sc.nextLine(); // Works now because the buffer is cleared
 			System.out.println("Enter course of Student:");
 			course=sc.nextLine();
 			s=new Student(roll,name,course);
@@ -81,8 +79,8 @@ public class Demo {
 			}
 		}
 		
+		sc.close();
 
 	}
 
 }
-// Annsh ka roll number is 25
