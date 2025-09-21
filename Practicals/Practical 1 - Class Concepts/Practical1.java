@@ -1,7 +1,7 @@
 // Practical 1: Demonstrating Constructor, Inheritance and Hierarchy
 // This is full ChatGPT Imma try to find the actual thing I did from bonet lab later.
 
-// Base class
+// Base/Parent class
 class Person {
     String name;
     int age;
@@ -18,32 +18,28 @@ class Person {
     }
 }
 
-// Derived class 1
+// Subclass inheriting the parent
 class Student extends Person {
     String course;
 
-    // Constructor of Student
     Student(String name, int age, String course) {
-        super(name, age);   // Calling parent constructor
+        super(name, age);   // Calling Person constructor
         this.course = course;
-        System.out.println("Student constructor called");
     }
 
     void displayStudent() {
-        displayInfo();
+        displayInfo(); // This one gets inherited from the Person class
         System.out.println("Course: " + course);
     }
 }
 
-// Derived class 2
+
 class Teacher extends Person {
     String subject;
 
-    // Constructor of Teacher
     Teacher(String name, int age, String subject) {
         super(name, age);
         this.subject = subject;
-        System.out.println("Teacher constructor called");
     }
 
     void displayTeacher() {
@@ -52,17 +48,22 @@ class Teacher extends Person {
     }
 }
 
-// Main class
+
 public class Practical1 {
     public static void main(String[] args) {
-        Student s = new Student("John", 20, "Computer Science");
+        Student s = new Student("Ian", 19, "BscIT");
         System.out.println("-----------------");
         s.displayStudent();
 
         System.out.println();
 
-        Teacher t = new Teacher("Alice", 35, "Mathematics");
+        Teacher t = new Teacher("Onasex", 18, "GameDev");
         System.out.println("-----------------");
         t.displayTeacher();
+
+        // Parent p = new SubClass(); will work
+        // SubClass sc = new Parent(); will not work
+        Person p = new  Student("Eshun",20,"AI Engineer or something");
+        p.displayInfo();
     }
 }
